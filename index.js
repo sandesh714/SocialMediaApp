@@ -1,22 +1,26 @@
+const dotenv = require("dotenv");
+
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
-
-
 // Import the mongoose module
 const mongoose = require("mongoose");
+dotenv.config();
 
-mongoose.set("strictQuery", false);
 
 
-const mongoDB = "mongodb://127.0.0.1/my_database";
-
-// Wait for database to connect, logging an error if there is a problem
-main().catch((err) => console.log(err));
-async function main() {
-  await mongoose.connect(mongoDB);
+const connectionString = process.env.MONGODB_SRV;
+const connectToDB = async () => {
+  try {
+      await mongoose.connect(connectionString, {
+          autoIndex: true
+      })
+      console.log('Connected to Mongodb');} catch (error) {
+      console.error(error);
+  }
 }
 
+connectToDB();
 
 // Define schema
 const Schema = mongoose.Schema;
@@ -37,18 +41,27 @@ app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
 
-app.get('/api/hello', (req, res) => {
-    res.json({ message: 'Hello, World!' });
-  });
+var { graphql, buildSchema } = require("graphql")
 
-  let todos = [];
+// Construct a schema, using GraphQL schema language
+var schema = buildSchema(`
+  type Query {
+    hello: String
+  }
+`)
 
-app.get('/api/todos', (req, res) => {
-  res.json(todos);
-});
+// The rootValue provides a resolver function for each API endpoint
+var rootValue = {
+  hello: () => {
+    return "Hello world!"
+  },
+}
 
-app.post('/api/todos', (req, res) => {
-  const newTodo = req.body;
-  todos.push(newTodo);
-  res.status(201).json(newTodo);
-});
+// Run the GraphQL query '{ hello }' and print out the response
+graphql({
+  schema,
+  source: "{ hello }",
+  rootValue,
+}).then(response => {
+  console.log(response)
+})
