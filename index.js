@@ -5,46 +5,14 @@ const app = express();
 const mongoose = require("mongoose");
 dotenv.config();
 
-
-const Post = require("./models/Post");
+const typeDefs = require('./graphql/typeDefs')
+const resolvers = require('./graphql/resolvers')
 const { ApolloServer } = require("apollo-server");
-const graphql = require('graphql-tag');
-
-
-const typeDefs = graphql`
-  type Post{
-    id: ID!
-    content: String!
-    createdAt: String!
-    username: String!
-  }
-  type Query{
-    getPosts: [Post]
-  }
-`;
-
-const resolvers = {
-  Query: {
-    async getPosts(){
-      try{
-        const posts = await Post.find();
-        return posts;
-      } catch(err){
-        throw new Error(err);
-      }
-    }
-  }
-};
 
 const server = new ApolloServer({
   typeDefs, 
   resolvers
 });
-
-
-
-
-
 
 const connectionString = process.env.MONGODB_SRV;
 mongoose  
