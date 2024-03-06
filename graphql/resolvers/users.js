@@ -62,7 +62,7 @@ module.exports = {
             },
             context,
             info
-        ){
+            ){
             // TODO: Validate user data
 
             const {valid, errors } = validateRegisterInput(username, email, password, confirmPassword);
