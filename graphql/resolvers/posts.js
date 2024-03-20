@@ -29,6 +29,11 @@ module.exports = {
       Mutation: {
         async createPost(_, { content }, context){
             const user = checkAuth(context);
+
+            if(args.body.trim() === '') {
+                throw new Error("Post body must not be empty");
+            }
+
             const newPost = new Post({
                 content, 
                 user : user.id, 
@@ -38,13 +43,15 @@ module.exports = {
 
             const post = await newPost.save();
 
+            context.pubsub.publish('NEW_POST', {
+                newPost: post
+            });
             return post;
         }, 
         async deletePost(_, { postId}, context){
             const user = checkAuth(context);
             try {
                 const post = await Post.findById(postId);
-                console.log(post);
                 if(user.username === post.username){
                     console.log("Before delete");
                     await post.deleteOne();
