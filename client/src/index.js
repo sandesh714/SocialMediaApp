@@ -2,14 +2,32 @@
 import ReactDOM from 'react-dom/client';
 
 import reportWebVitals from './reportWebVitals';
-import ApolloProvider from './ApolloProvider';
+import ApolloProviderr from './ApolloProvider';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(ApolloProvider);
-// ReactDOM.render(ApolloProvider, document.getElementById('root'))
+root.render(ApolloProviderr);
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+// // If you want to start measuring performance in your app, pass a function
+// // to log results (for example: reportWebVitals(console.log))
+// // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
+
+
+
+// import React from 'react';
+// import ReactDOM from 'react-dom';
+// import App from './App';
+// import { ApolloProvider, ApolloClient, InMemoryCache } from '@apollo/client';
+
+// Create an ApolloClient instance and set up the URI of your GraphQL server
+// const client = new ApolloClient({
+//   uri: 'http://localhost:5000/graphql', // Change this to your GraphQL server URI
+//   cache: new InMemoryCache()
+// });
+
+// ReactDOM.render(
+// ApolloProvider,
+//   document.getElementById('root')
+// );
+
