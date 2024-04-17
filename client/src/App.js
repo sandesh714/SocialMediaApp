@@ -1,52 +1,41 @@
-// import React from 'react';
-// import { BrowserRouter as Router,Routes, Route } from 'react-router-dom';
-// import { Container } from 'semantic-ui-react';
-
+// import MenuBar from './components/MenuBar';
+import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import 'semantic-ui-css/semantic.min.css';
 import './App.css';
 
+
+import { AuthProvider } from './context/auth';
+import AuthRoute from './util/AuthRoute';
+
+
 import MenuBar from './components/MenuBar';
-// import Home from './pages/Home';
-// import Login from './pages/Login';
-// import Register from './pages/Register';
-
-
-
-// function App() {
-//   return (
-//       <Router>
-//         <Container>
-//           <MenuBar />
-//           <Routes>
-//             <Route exact path ="/" component={ Home } />
-//             <Route exact path="/login" compoent={ Login } />
-//             <Route exact path="/register" compoent={ Register } />
-//           </Routes>
-//         </Container>
-//       </Router>
-//   );
-// }
-
-// export default App;
-import React from 'react';
-import {  Route, Routes, BrowserRouter } from 'react-router-dom';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Register from './pages/Register';
+import { Container } from 'semantic-ui-react';
 
-const App = () => {
+function App() {
   return (
+    <div> 
+      <AuthProvider>
+        <Router>
+        <Container>
+          <MenuBar />
+          <Routes>
+            <Route exact path='/' Component={Home} element={<AuthRoute/>} ></Route>
+            <Route exact path='/register' Component={Register} element={<AuthRoute/>} ></Route>
+            <Route exact path='/login' Component={Login} element={<AuthRoute/>} ></Route>
+          </Routes>
 
-       
-    <BrowserRouter>
-      <MenuBar />
-      <Routes> 
-          <Route path="/" component={Home} />
-          <Route path="/login" component={Login} />
-          <Route path="/register" component={Register} />
-        </Routes>
-    </BrowserRouter>
-  )
-};
+
+
+        </Container>
+        </Router>
+      </AuthProvider>
+    </div>
+
+
+  );
+}
 
 export default App;
