@@ -21,3 +21,17 @@ export const POST_FETCHING_QUERY = gql`
     }
   }
 `;
+
+
+
+export const USER_FETCHING_QUERY = gql`
+  {
+    getUsers {
+      id
+      email
+      token
+      username
+      createdAt
+    }
+  }
+`;

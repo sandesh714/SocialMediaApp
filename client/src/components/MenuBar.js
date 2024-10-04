@@ -50,6 +50,13 @@ function MenuBar() {
               as={ Link }
               to ="/register"
             />
+            <MenuItem
+              name='aboutme'
+              active={activeItem === 'aboutme'}
+              onClick={handleItemClick}
+              as={ Link }
+              to ="/aboutme"
+            />
           </MenuMenu>
         </Menu>
     );
