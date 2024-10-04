@@ -120,6 +120,42 @@ module.exports = {
                 id: res._id,
                 token
             }
+        },
+
+        async addFriend(_, { friendId }, context) {
+            const user = context.user;  // Assuming user context is available (add auth middleware if necessary)
+
+            if (!user) {
+                throw new UserInputError("Authentication required");
+            }
+
+            try {
+                const currentUser = await User.findById(user.id);
+                const friend = await User.findById(friendId);
+
+                if (!friend) {
+                    throw new UserInputError("Friend not found");
+                }
+
+                // Check if friend is already in user's friends list
+                if (currentUser.friends.includes(friendId)) {
+                    throw new UserInputError("User is already a friend");
+                }
+
+                // Add friend
+                currentUser.friends.push(friendId);
+                await currentUser.save();
+
+                return {
+                    id: currentUser.id,
+                    username: currentUser.username,
+                    email: currentUser.email,
+                    friends: currentUser.friends  // Return updated friends list
+                };
+            } catch (err) {
+                throw new Error(err);
+            }
         }
+
     }
 }

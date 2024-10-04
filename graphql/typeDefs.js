@@ -49,5 +49,6 @@ module.exports = gql`
     createComment(postId: String!, content: String!): Post!
     deleteComment(postId: ID!, commentId: ID!): Post!
     likePost(postId: ID!): Post!
+    addFriend(userId: ID!): User!
   }
 `;

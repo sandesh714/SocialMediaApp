@@ -1,11 +1,78 @@
+/* Page Title */
 .page-title {
-  display: block !important;
+  display: block;
   text-align: center;
-  font-size: 2rem;
-  margin-top: 10px;
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #333;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
+/* Form Container */
 .form-container {
-  width: 400px;
-  margin: auto;
+  width: 100%;
+  max-width: 500px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease-in-out;
+}
+
+.form-container:hover {
+  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* User Card */
+.user-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 15px;
+  transition: transform 0.2s ease;
+}
+
+.user-card:hover {
+  transform: translateY(-3px);
+}
+
+/* User Info */
+.user-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.user-info h3 {
+  font-size: 1.2rem;
+  color: #333;
+  margin: 0;
+}
+
+.user-info p {
+  font-size: 0.9rem;
+  color: #777;
+  margin: 5px 0 0;
+}
+
+/* Add Friend Button */
+.add-friend-btn {
+  padding: 8px 12px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #fff;
+  background-color: #2185d0;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.add-friend-btn:hover {
+  background-color: #1a73b8;
 }
